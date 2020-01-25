@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-export default function Signup() {
+export default function Signup(props) {
     const [inputs, setInputs] = useState({
-        fulName: "",
+        fullName: "",
         username: "",
         email: "",
         password: ""
@@ -11,11 +12,21 @@ export default function Signup() {
     const handleChanges = (e) => {
         e.preventDefault();
         setInputs({...inputs, [e.target.name]: e.target.value})
-        console.log("inputs", inputs)
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        axios
+        .post('https://ptbw-art-portfolio.herokuapp.com/auth/signup', inputs)
+        .then((res) => {
+            console.log("response", res);
+            // save your token to local storage
+            localStorage.setItem("token", Date.now())
+            props.history.push("/dahboard");
+        })
+        .catch((err) => {
+            console.error(err);
+        })
         console.log("inputs at handleSubmit", inputs);
     };
 
@@ -30,7 +41,7 @@ export default function Signup() {
                 <label for="input_text">Username</label>
             </div>
             <div class="input-field col s6">
-                <input onChange={handleChanges} name="email" type="password" value={inputs.email}/>
+                <input onChange={handleChanges} name="email" type="text" value={inputs.email}/>
                 <label for="input_text">Email</label>
             </div>
             <div class="input-field col s6">

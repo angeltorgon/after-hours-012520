@@ -5,6 +5,7 @@ import Login from './views/Login';
 import Signup from './views/Signup';
 import Dashboard from './views/Dashboard';
 import Nav from './components/Nav';
+import PrivateRoute from './helpers/PrivateRoute';
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Signup} />
         <Route path="/signup" component={Login} />
-        <Route path="/dashboard" component={Dashboard} />
+        <PrivateRoute path="/dashboard" component={Dashboard} />
       </Switch>
     </div>
   );
