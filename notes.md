@@ -17,3 +17,6 @@
     - ItemsList
     - ItemCard
 
+4. Dependencies
+    - axios
+    - react-router-dom
